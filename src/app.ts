@@ -4,6 +4,7 @@ import { Database } from "./database/config.database"
 import { ArticleRoute } from "./route/article.router";
 import { EventRoute } from "./route/event.router";
 import { PlaceRoute } from "./route/place.router";
+import { SportRoute } from "./route/sport.router";
 
 class ObninskSport{
     private app;
@@ -35,8 +36,8 @@ class ObninskSport{
         this.app.use(express.json());
         this.app.use("/article", new ArticleRoute().getRouter());
         this.app.use("/event", new EventRoute().getRouter());
-        this.app.use("/event", new PlaceRoute().getRouter());
-        this.app.use("/event", new SportRoute().getRouter());
+        this.app.use("/place", new PlaceRoute().getRouter());
+        this.app.use("/sport", new SportRoute().getRouter());
 
     }
     public run(): void{
