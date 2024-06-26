@@ -1,4 +1,4 @@
-import { default as UserModel, User } from '../database/models/user.model';
+import { default as UserModel, User } from '../database/model/user.model';
 
 export default class UserController {
     constructor() {

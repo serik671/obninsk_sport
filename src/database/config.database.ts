@@ -1,10 +1,11 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 
-import UserModel from "./models/user.model";
-import UserTypeModel from "./models/userType.model";
+import UserModel from "./model/user.model";
+import UserTypeModel from "./model/userType.model";
+import { PersonModel } from "./model/person.model";
 
-export default class Database{
-    private static instance: Database|null = null;
+export default class Database {
+    private static instance: Database | null = null;
     private connection: Sequelize;
 
     private constructor(databaseName: string, userName: string,
@@ -17,44 +18,43 @@ export default class Database{
     }
 
     public static init(databaseName: string,
-        userName: string, userPassword: string): Database{
-        if (Database.instance === null){
+        userName: string, userPassword: string): Database {
+        if (Database.instance === null) {
             Database.instance = new Database(databaseName, userName, userPassword);
         }
-        return Database.instance; 
+        return Database.instance;
     }
 
-    public static getConnection(): Sequelize{
+    public static getConnection(): Sequelize {
         return this.instance?.connection!;
     }
 
     public static initUserModel() {
         UserModel.init(
             {
-                // Model attributes are defined here
                 id: {
                     type: DataTypes.INTEGER,
-                    //autoIncrement: true,
+                    autoIncrement: true,
                     primaryKey: true,
                 },
 
                 login: {
-                  type: DataTypes.STRING,
-                  allowNull: false,
+                    type: DataTypes.STRING,
+                    allowNull: false,
                 },
                 passwd: {
-                  type: DataTypes.STRING,
-                  allowNull: false,
+                    type: DataTypes.STRING,
+                    allowNull: false,
                 },
                 type_id: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 }
-              },
-              {
-                modelName: 'Users',
+            },
+            {
+                tableName: 'user',
                 sequelize: Database.getConnection(),
-              },
+            },
         )
     }
 
@@ -63,7 +63,7 @@ export default class Database{
             {
                 id: {
                     type: DataTypes.INTEGER,
-                    //autoIncrement: true,
+                    autoIncrement: true,
                     primaryKey: true,
                 },
                 name: {
@@ -72,14 +72,54 @@ export default class Database{
                 }
             },
             {
-                modelName: 'UserType',
+                tableName: 'user_type',
                 sequelize: Database.getConnection(),
             },
         )
     }
+    public static initPersonModel() {
+        PersonModel.init({
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+            firstName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            middleName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            phoneNumber: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            user_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            }
+        },
+        {
+            sequelize: this.getConnection(),
+            tableName: "persone"
+        });
+    }
+
+    public static linkPersoneUser(){
+        UserModel.hasOne(PersonModel, {foreignKey: "user_id"});
+    }
 
     public static makeUserLinks() {
         UserTypeModel.hasMany(UserModel, { foreignKey: 'type_id' });
-        UserModel.belongsTo(UserTypeModel, { foreignKey: 'id' });
     }
 }

@@ -2,6 +2,7 @@ import { default as express, Express } from "express";
 import dotenv from "dotenv";
 import Database from "./database/config.database"
 import UserRouter from "./router/user.router";
+import PersonRouter from "./router/person.router";
 
 class ObninskSport{
     private app: Express;
@@ -16,6 +17,7 @@ class ObninskSport{
         this.userRouter = new UserRouter();
         this.app.use(express.json());
         this.app.use('/user', this.userRouter.getRouter());
+        this.app.use('/person', new PersonRouter().getRouter());
 
         dotenv.config();
         this.name = process.env.APP_NAME!;
@@ -27,7 +29,9 @@ class ObninskSport{
         Database.init(dbName, dbUser, dbPassword);
         Database.initUserModel();
         Database.initUserTypeModel();
-        //Database.makeUserLinks();
+        Database.initPersonModel();
+        Database.linkPersoneUser();
+        Database.makeUserLinks();
         Database.getConnection().sync().then(result=>{
             console.log("Database init!");
         })
