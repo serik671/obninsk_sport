@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { Database } from "./database/config.database"
+import { ArticleRoute } from "./route/article.router";
 
 class ObninskSport{
     private app;
@@ -14,6 +15,10 @@ class ObninskSport{
         Database.init(dbName, dbUser, dbPassword);
         Database.initArticleModel();
         Database.initEventModel();
+        Database.initSportModel();
+        Database.initPlaceModel();
+        Database.linkEventPlace();
+        Database.linkEventSport();
         Database.linkArticleEvent();
         Database.getConnection().sync().then(result=>{
             console.log("Database init!");
@@ -26,6 +31,7 @@ class ObninskSport{
         this.name = process.env.APP_NAME!;
 
         this.app.use(express.json());
+        this.app.use("/article", new ArticleRoute().getRouter());
     }
     public run(): void{
         this.app.listen(this.port, "localhost", ()=>{

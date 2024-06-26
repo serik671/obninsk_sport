@@ -4,8 +4,8 @@ export interface Article{
     id: number,
     title: string,
     text: string,
-    img: Uint8Array,
-    event_id: number
+    img: Uint8Array|null,
+    event_id: number|null
 }
 
 export class ArticleModel extends Model<Article>{}

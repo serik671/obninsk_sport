@@ -1,6 +1,8 @@
 import { Sequelize, DataTypes } from "sequelize";
 import { ArticleModel } from "./model/article.model";
 import { EventModel } from "./model/event.model";
+import { SportModel } from "./model/sport.model";
+import { PlaceModel } from "./model/place.model";
 
 export class Database{
     private static instance: Database|null = null;
@@ -73,12 +75,66 @@ export class Database{
             },
             place_id: {
                 type: DataTypes.INTEGER
+            },
+            age_id: {
+                type: DataTypes.INTEGER
+            },
+            gender: {
+                type: DataTypes.ENUM('F', 'M', 'A'),
+                allowNull: false,
+                defaultValue: 'A'
             }
         },
         {
             sequelize: this.getConnection(),
             tableName: "event"
         });
+    }
+    public static initSportModel(){
+        SportModel.init({
+            id: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+                autoIncrement: true
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
+        },
+        {
+            sequelize: this.getConnection(),
+            tableName: "sport"
+        });
+    }
+    public static initPlaceModel(){
+        PlaceModel.init({
+            id: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+                autoIncrement: true
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            address: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
+        },
+        {
+            sequelize: this.getConnection(),
+            tableName: "place"
+        });
+    }
+    public static linkEventPlace(){
+        PlaceModel.hasMany(EventModel, {foreignKey: "place_id"});
+        EventModel.belongsTo(PlaceModel, {foreignKey: "id"});
+    }
+    public static linkEventSport(){
+        SportModel.hasMany(EventModel, {foreignKey: "sport_id"});
+        EventModel.belongsTo(SportModel, {foreignKey: "id"});
     }
     public static linkArticleEvent(){
         EventModel.hasMany(ArticleModel, {

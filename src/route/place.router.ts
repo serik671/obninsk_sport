@@ -1,20 +1,20 @@
 import { Router } from "express";
-import { ArticleController } from "../controller/article.controller";
+import { PlaceController } from "../controller/place.controller";
 import { ValidationError } from "sequelize";
 
-export class ArticleRoute{
+export class PlaceRoute{
     private router: Router = Router();
-    private articleController = new ArticleController();
+    private placeController = new PlaceController();
     constructor(){
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
-                this.articleController.readMany(limit).then(result=>{
+                this.placeController.readMany(limit).then(result=>{
                     resp.send(result);
                 });
             })
             .post((req, resp) => {
-                this.articleController.create(req.body)
+                this.placeController.create(req.body)
                     .then(() => {
                         resp.send("Created!");
                     })
@@ -29,7 +29,7 @@ export class ArticleRoute{
         this.router.route("/:id")
             .get((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.articleController.read(id)
+                this.placeController.read(id)
                     .then(result=>{
                         if(result === undefined){
                             resp.status(404).send("Not found");
@@ -40,7 +40,7 @@ export class ArticleRoute{
             })
             .put((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.articleController.update(id, req.body)
+                this.placeController.update(id, req.body)
                     .then(()=>{
                         resp.send("OK");
                     })
@@ -53,7 +53,7 @@ export class ArticleRoute{
                     });
             })
             .delete((req, resp)=>{
-                this.articleController.delete(Number(req.params.id)||0).then(()=>{
+                this.placeController.delete(Number(req.params.id)||0).then(()=>{
                     resp.send("Deleted");
                 });
             });

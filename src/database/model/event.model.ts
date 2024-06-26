@@ -9,6 +9,8 @@ export interface Event{
     description: string,
     sport_id: number,
     place_id: number,
+    age_id: number,
+    gender: 'F' | 'M' | 'A'
 }
 
 export class EventModel extends Model<Event>{}
