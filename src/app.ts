@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import { Database } from "./database/config.database"
-class FlowerMarket{
+
+class ObninskSport{
     private app;
     private port: number;
     private name: string;
@@ -18,19 +19,16 @@ class FlowerMarket{
             console.log("Database error", error);
         });
         this.app = express();
-        this.port = parseInt(process.env.APP_PORT!);
-        console.log("Port", this.port);
+        this.port = Number(process.env.APP_PORT!);
         this.name = process.env.APP_NAME!;
-        console.log("Name", this.name);
 
         this.app.use(express.json());
-
     }
     public run(): void{
         this.app.listen(this.port, "localhost", ()=>{
-            console.log(this.name, "is running!");
+            console.log(this.name, "Server is running");
         });
     }
 }
 
-new FlowerMarket().run();
+new ObninskSport().run();
