@@ -3,6 +3,7 @@ import { ArticleModel } from "./model/article.model";
 import { EventModel } from "./model/event.model";
 import { SportModel } from "./model/sport.model";
 import { PlaceModel } from "./model/place.model";
+import { PlaceTypeModel } from "./model/placeType.model";
 
 export class Database{
     private static instance: Database|null = null;
@@ -121,12 +122,34 @@ export class Database{
             address: {
                 type: DataTypes.STRING,
                 allowNull: false
-            }
+            },
+            type_id: DataTypes.INTEGER
         },
         {
             sequelize: this.getConnection(),
             tableName: "place"
         });
+    }
+    public static initPlaceTypeModel(){
+        PlaceTypeModel.init({
+            id: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+                autoIncrement: true
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
+        },
+        {
+            sequelize: this.getConnection(),
+            tableName: "place_type"
+        });
+    }
+    public static linkPlaceType(){
+        PlaceTypeModel.hasMany(PlaceModel, {foreignKey: "type_id"});
+        PlaceModel.belongsTo(PlaceTypeModel, {foreignKey: "id"});
     }
     public static linkEventPlace(){
         PlaceModel.hasMany(EventModel, {foreignKey: "place_id"});
