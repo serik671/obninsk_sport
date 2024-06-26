@@ -1,0 +1,28 @@
+header {
+  width: 100vw;
+  height: 118px;
+}
+header .header-container {
+  padding: 16px 46px 16px 46px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, rgb(23, 23, 23) 24%, rgba(23, 23, 23, 0) 83%);
+}
+header .header-container nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: spacebetween;
+  align-items: center;
+}
+header .header-container nav .nav-element {
+  margin: 0 53px 0 0;
+  color: #ffffff;
+  text-decoration: none;
+}
+header .header-container .profile {
+  width: 86px;
+  height: 86px;
+  cursor: pointer;
+}/*# sourceMappingURL=Header.css.map */

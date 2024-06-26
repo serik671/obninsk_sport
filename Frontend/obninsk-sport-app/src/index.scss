@@ -1,0 +1,12 @@
+@import 'tools';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    @include set-font(normal, 24px);
+    background-color: $bg-color;
+}
+

@@ -1,0 +1,38 @@
+// VARIABLES =======
+
+
+// Colors
+$bg-color: #222222;
+$main-blue-color: #3D2CFF;
+$main-light-blue-color: #30F3FF;
+$main-gradient-color-default: linear-gradient(135deg, rgba(61,44,255,1) 0%, rgba(48,243,255,1) 100%);
+$main-gradient-color-straight: linear-gradient(90deg, rgba(61,44,255,1) 0%, rgba(48,243,255,1) 100%);
+$main-text-color: #ffffff;
+$footer-text-color: #e0e0e0;
+
+
+// MIXINS =========
+
+// Display
+@mixin center-flex() {
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin display-flex($direction, $justify: normal, $align: normal) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+// Fonts
+
+@mixin set-font($boldness, $size) {
+    font-style: normal;
+    font-variant: normal;
+    font-weight: $boldness;
+    font-size: $size;
+    font-family: 'Montserrat', sans-serif;
+    color: $main-text-color;
+}
