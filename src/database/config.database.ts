@@ -149,22 +149,16 @@ export class Database{
     }
     public static linkPlaceType(){
         PlaceTypeModel.hasMany(PlaceModel, {foreignKey: "type_id"});
-        PlaceModel.belongsTo(PlaceTypeModel, {foreignKey: "id"});
     }
     public static linkEventPlace(){
         PlaceModel.hasMany(EventModel, {foreignKey: "place_id"});
-        EventModel.belongsTo(PlaceModel, {foreignKey: "id"});
     }
     public static linkEventSport(){
         SportModel.hasMany(EventModel, {foreignKey: "sport_id"});
-        EventModel.belongsTo(SportModel, {foreignKey: "id"});
     }
     public static linkArticleEvent(){
         EventModel.hasMany(ArticleModel, {
             foreignKey: "event_id"
-        });
-        ArticleModel.belongsTo(EventModel, {
-            foreignKey: "id"
         });
     }
     public static getConnection(): Sequelize{
