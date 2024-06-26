@@ -44,6 +44,11 @@ export class Database{
             },
             event_id: {
                 type: DataTypes.INTEGER
+            },
+            deleted: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
             }
         },
         {
@@ -85,6 +90,11 @@ export class Database{
                 type: DataTypes.ENUM('F', 'M', 'A'),
                 allowNull: false,
                 defaultValue: 'A'
+            },
+            deleted: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
             }
         },
         {

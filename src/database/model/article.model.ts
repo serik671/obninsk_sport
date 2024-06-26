@@ -5,7 +5,8 @@ export interface Article{
     title: string,
     text: string,
     img: Uint8Array|null,
-    event_id: number|null
+    event_id: number|null,
+    deleted: boolean
 }
 
 export class ArticleModel extends Model<Article>{}

@@ -10,7 +10,8 @@ export interface Event{
     sport_id: number,
     place_id: number,
     age_id: number,
-    gender: 'F' | 'M' | 'A'
+    gender: 'F' | 'M' | 'A',
+    deleted: boolean
 }
 
 export class EventModel extends Model<Event>{}

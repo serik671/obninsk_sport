@@ -29,7 +29,7 @@ class ObninskSport{
         Database.linkEventPlace();
         Database.linkEventSport();
         Database.linkArticleEvent();
-        Database.getConnection().sync().then(result=>{
+        Database.getConnection().sync({alter: true}).then(result=>{
             console.log("Database init!");
         })
         .catch(error=>{
