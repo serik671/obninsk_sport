@@ -9,6 +9,7 @@ export class EventRoute{
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
+                limit = limit < 0 ? 10 : limit;
                 this.EventController.readMany(limit).then(result=>{
                     resp.send(result);
                 });

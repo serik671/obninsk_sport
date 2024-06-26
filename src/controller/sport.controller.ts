@@ -9,6 +9,10 @@ export class SportController{
         let sport =(await SportModel.findByPk(id))?.get();
         return sport;
     }
+    public async readAll(){
+        let sports = (await SportModel.findAll()).map(table=>table.get());
+        return sports;
+    }
     public async readMany(count: number){
         let sports = (await SportModel.findAll({limit: count})).map(table=>table.get());
         return sports;

@@ -9,6 +9,10 @@ export class PlaceTypeController{
         let placeType =(await PlaceTypeModel.findByPk(id))?.get();
         return placeType;
     }
+    public async readAll(){
+        let placeTypes = (await PlaceTypeModel.findAll()).map(table=>table.get());
+        return placeTypes;
+    }
     public async readMany(count: number){
         let placeTypes = (await PlaceTypeModel.findAll({limit: count})).map(table=>table.get());
         return placeTypes;

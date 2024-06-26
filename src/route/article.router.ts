@@ -9,6 +9,7 @@ export class ArticleRoute{
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
+                limit = limit < 0 ? 10 : limit;
                 this.articleController.readMany(limit).then(result=>{
                     resp.send(result);
                 });

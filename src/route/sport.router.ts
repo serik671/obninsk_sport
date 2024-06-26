@@ -9,9 +9,15 @@ export class SportRoute{
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
-                this.sportController.readMany(limit).then(result=>{
-                    resp.send(result);
-                });
+                if (limit < 0){
+                    this.sportController.readAll().then(result=>{
+                        resp.send(result);
+                    });
+                }else{
+                    this.sportController.readMany(limit).then(result=>{
+                        resp.send(result);
+                    });
+                }
             })
             .post((req, resp) => {
                 this.sportController.create(req.body)

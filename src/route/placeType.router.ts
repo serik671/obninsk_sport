@@ -9,9 +9,15 @@ export class PlaceTypeRoute{
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
-                this.placeTypeController.readMany(limit).then(result=>{
-                    resp.send(result);
-                });
+                if (limit < 0){
+                    this.placeTypeController.readAll().then(result=>{
+                        resp.send(result);
+                    });
+                }else{
+                    this.placeTypeController.readMany(limit).then(result=>{
+                        resp.send(result);
+                    });
+                }
             })
             .post((req, resp) => {
                 this.placeTypeController.create(req.body)
