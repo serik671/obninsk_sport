@@ -6,6 +6,7 @@ import { EventRoute } from "./route/event.router";
 import { PlaceRoute } from "./route/place.router";
 import { SportRoute } from "./route/sport.router";
 import { PlaceTypeRoute } from "./route/placeType.router";
+import { AgeRoute } from "./route/age.router";
 
 class ObninskSport{
     private app;
@@ -22,6 +23,8 @@ class ObninskSport{
         Database.initSportModel();
         Database.initPlaceModel();
         Database.initPlaceTypeModel();
+        Database.initAgeModel();
+        Database.linkEventAge();
         Database.linkPlaceType();
         Database.linkEventPlace();
         Database.linkEventSport();
@@ -42,6 +45,7 @@ class ObninskSport{
         this.app.use("/place", new PlaceRoute().getRouter());
         this.app.use("/sport", new SportRoute().getRouter());
         this.app.use("/place-type", new PlaceTypeRoute().getRouter());
+        this.app.use("/age", new AgeRoute().getRouter());
     }
     public run(): void{
         this.app.listen(this.port, "localhost", ()=>{

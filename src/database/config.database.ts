@@ -4,6 +4,7 @@ import { EventModel } from "./model/event.model";
 import { SportModel } from "./model/sport.model";
 import { PlaceModel } from "./model/place.model";
 import { PlaceTypeModel } from "./model/placeType.model";
+import { AgeModel } from "./model/age.model";
 
 export class Database{
     private static instance: Database|null = null;
@@ -146,6 +147,26 @@ export class Database{
             sequelize: this.getConnection(),
             tableName: "place_type"
         });
+    }
+    public static initAgeModel(){
+        AgeModel.init({
+            id: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+                autoIncrement: true
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
+        },
+        {
+            sequelize: this.getConnection(),
+            tableName: "age"
+        });
+    }
+    public static linkEventAge(){
+        AgeModel.hasMany(EventModel, {foreignKey: "age_id"});
     }
     public static linkPlaceType(){
         PlaceTypeModel.hasMany(PlaceModel, {foreignKey: "type_id"});
