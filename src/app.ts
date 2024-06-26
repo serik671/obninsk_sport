@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import { Database } from "./database/config.database"
 import { ArticleRoute } from "./route/article.router";
+import { EventRoute } from "./route/event.router";
+import { PlaceRoute } from "./route/place.router";
 
 class ObninskSport{
     private app;
@@ -32,6 +34,10 @@ class ObninskSport{
 
         this.app.use(express.json());
         this.app.use("/article", new ArticleRoute().getRouter());
+        this.app.use("/event", new EventRoute().getRouter());
+        this.app.use("/event", new PlaceRoute().getRouter());
+        this.app.use("/event", new SportRoute().getRouter());
+
     }
     public run(): void{
         this.app.listen(this.port, "localhost", ()=>{
