@@ -1,4 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
+import { ArticleModel } from "./model/article.model";
+import { EventModel } from "./model/event.model";
 
 export class Database{
     private static instance: Database|null = null;
@@ -17,6 +19,74 @@ export class Database{
             Database.instance = new Database(databaseName, userName, userPassword);
         }
         return Database.instance; 
+    }
+    public static initArticleModel(){
+        ArticleModel.init({
+            id: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+                autoIncrement: true
+            },
+            title: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            text: {
+                type: DataTypes.TEXT,
+                allowNull: false
+            },
+            img: {
+                type: DataTypes.BLOB('medium')
+            },
+            event_id: {
+                type: DataTypes.INTEGER
+            }
+        },
+        {
+            sequelize: Database.getConnection(),
+            tableName: "article"
+        });
+    }
+    public static initEventModel(){
+        EventModel.init({
+            id: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+                autoIncrement: true
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            start: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            end: {
+                type: DataTypes.DATE,
+                allowNull: false
+            },
+            award: DataTypes.DATE,
+            description: DataTypes.STRING,
+            sport_id: {
+                type: DataTypes.INTEGER
+            },
+            place_id: {
+                type: DataTypes.INTEGER
+            }
+        },
+        {
+            sequelize: this.getConnection(),
+            tableName: "event"
+        });
+    }
+    public static linkArticleEvent(){
+        EventModel.hasMany(ArticleModel, {
+            foreignKey: "event_id"
+        });
+        ArticleModel.belongsTo(EventModel, {
+            foreignKey: "id"
+        });
     }
     public static getConnection(): Sequelize{
         return this.instance?.connection!;
