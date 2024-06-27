@@ -1,4 +1,4 @@
 node_modules/
-dot.env
+.env
 dist/
 *.json
