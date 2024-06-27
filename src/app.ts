@@ -9,6 +9,7 @@ import { PlaceTypeRouter } from "./router/placeType.router";
 import { AgeRouter } from "./router/age.router";
 import UserRouter from "./router/user.router";
 import PersonRouter from "./router/person.router";
+import UserTypeRouter from "./router/userType.router";
 
 class ObninskSport{
     private app: Express;
@@ -43,12 +44,14 @@ class ObninskSport{
         Database.initPersonModel();
         Database.linkPersoneUser();
         Database.makeUserLinks();
+
         Database.getConnection().sync().then(result=>{
             console.log("Database init!");
         })
         .catch(error=>{
             console.log("Database error", error);
         });
+
         this.app = express();
         this.port = Number(process.env.APP_PORT!);
         this.name = process.env.APP_NAME!;
@@ -62,6 +65,7 @@ class ObninskSport{
         this.app.use("/age", new AgeRouter().getRouter());
       
         this.app.use('/user', new UserRouter().getRouter());
+        this.app.use('/user-type', new UserTypeRouter().getRouter());
         this.app.use('/person', new PersonRouter().getRouter());
     }
     
