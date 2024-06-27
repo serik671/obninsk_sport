@@ -10,7 +10,7 @@ import UserModel from "./model/user.model";
 import UserTypeModel from "./model/userType.model";
 import { PersonModel } from "./model/person.model";
 
-export default class Database {
+export class Database {
     private static instance: Database | null = null;
     private connection: Sequelize;
 
