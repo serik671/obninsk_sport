@@ -10,6 +10,7 @@ import { AgeRouter } from "./router/age.router";
 import UserRouter from "./router/user.router";
 import PersonRouter from "./router/person.router";
 import UserTypeRouter from "./router/userType.router";
+import { PersonHasEventRouter } from "./router/personHasEvent.router";
 
 class ObninskSport{
     private app: Express;
@@ -45,7 +46,9 @@ class ObninskSport{
         Database.linkPersoneUser();
         Database.makeUserLinks();
 
-        Database.getConnection().sync().then(result=>{
+        Database.initPersonHasEvent();
+
+        Database.getConnection().sync({force: true}).then(result=>{
             console.log("Database init!");
         })
         .catch(error=>{
@@ -63,6 +66,8 @@ class ObninskSport{
         this.app.use("/sport", new SportRouter().getRouter());
         this.app.use("/place-type", new PlaceTypeRouter().getRouter());
         this.app.use("/age", new AgeRouter().getRouter());
+
+        this.app.use("/person-has-event", new PersonHasEventRouter().getRouter());
       
         this.app.use('/user', new UserRouter().getRouter());
         this.app.use('/user-type', new UserTypeRouter().getRouter());
