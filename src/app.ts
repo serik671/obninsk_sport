@@ -48,7 +48,7 @@ class ObninskSport{
 
         Database.initPersonHasEvent();
 
-        Database.getConnection().sync({force: true}).then(result=>{
+        Database.getConnection().sync().then(result=>{
             console.log("Database init!");
         })
         .catch(error=>{
