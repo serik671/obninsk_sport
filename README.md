@@ -1,5 +1,6 @@
 
-![obninsk_sport_erd](https://github.com/serik671/obninsk_sport/assets/70952041/d94de4b0-2bf0-4140-8424-699d4d12e9d8)
+![Uploading obninsk_sport_erd.png…]()
+
 ---------------------------------------------------------------------------------------
 ## Пояснение:
 + event - Спортивное событие
