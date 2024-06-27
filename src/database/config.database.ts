@@ -9,6 +9,7 @@ import { AgeModel } from "./model/age.model";
 import UserModel from "./model/user.model";
 import UserTypeModel from "./model/userType.model";
 import { PersonModel } from "./model/person.model";
+import { PersonHasEventModel } from "./model/personHasEvent.model";
 
 export class Database {
     private static instance: Database | null = null;
@@ -105,7 +106,7 @@ export class Database {
             }
         },
         {
-            sequelize: this.getConnection(),
+            sequelize: Database.getConnection(),
             tableName: "event"
         });
     }
@@ -122,7 +123,7 @@ export class Database {
             }
         },
         {
-            sequelize: this.getConnection(),
+            sequelize: Database.getConnection(),
             tableName: "sport"
         });
     }
@@ -144,7 +145,7 @@ export class Database {
             type_id: DataTypes.INTEGER
         },
         {
-            sequelize: this.getConnection(),
+            sequelize: Database.getConnection(),
             tableName: "place"
         });
     }
@@ -161,7 +162,7 @@ export class Database {
             }
         },
         {
-            sequelize: this.getConnection(),
+            sequelize: Database.getConnection(),
             tableName: "place_type"
         });
     }
@@ -178,7 +179,7 @@ export class Database {
             }
         },
         {
-            sequelize: this.getConnection(),
+            sequelize: Database.getConnection(),
             tableName: "age"
         });
     }
@@ -283,9 +284,34 @@ export class Database {
             }
         },
         {
-            sequelize: this.getConnection(),
+            sequelize: Database.getConnection(),
             tableName: "persone"
         });
+    }
+
+    public static initPersonHasEvent(){
+        PersonHasEventModel.init({
+            id: {
+                primaryKey: true,
+                type: DataTypes.INTEGER,
+                autoIncrement: true
+            },
+            person_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            event_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            }
+        },
+        {
+            sequelize: Database.getConnection(),
+            tableName: "person_has_event"
+        });
+        
+        PersonModel.belongsToMany(EventModel, {through: "person_has_event", foreignKey: "person_id"});
+        EventModel.belongsToMany(PersonModel, {through: "person_has_event", foreignKey: "event_id"});
     }
 
     public static linkPersoneUser(){

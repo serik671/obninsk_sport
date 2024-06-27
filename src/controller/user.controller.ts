@@ -21,6 +21,10 @@ export default class UserController {
         return UserModel.findOne({ where: { id: id } });
     }
 
+    public async getUserByLogin(login: string){
+        return (await UserModel.findOne({where: {login: login}}))?.get();
+    }
+
     async updateUser(id: number, user: User) {
         await UserModel.build(user).validate();
         return UserModel.update(user, { where: { id: id } });
