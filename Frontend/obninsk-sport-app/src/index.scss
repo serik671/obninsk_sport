@@ -6,7 +6,20 @@
 }
 
 body {
+    overflow-y: auto;
+    overflow-x: hidden;
     @include set-font(normal, 24px);
     background-color: $bg-color;
+
+
+    .container {
+        width: 100vw;
+        height: 100vh;
+        
+        background-image: url('../public/img/FIBA-3-x-3-WT-Chengdu-2017-2.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow-x: hidden;
+    }
 }
 

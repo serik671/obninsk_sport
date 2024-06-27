@@ -1,0 +1,36 @@
+@import '../../tools';
+
+.card-container {
+    min-width: 560px;
+    max-width: 570px;
+    height: 400px;
+    padding: 20px;
+
+    @include display-flex(column);
+    background-image: url('../../../public/img/a36c8b08ba03f76e365eb34f09838fe0.jpg');
+    background-repeat: no-repeat;
+
+
+    .card-label {
+        @include display-flex(row, normal, center);
+        .sport-icon {
+            width: 46px;
+        }
+
+        .title {
+            @include set-font(bold, 32px);
+            margin-left: 20px;
+        }
+    }
+    .date {
+        @include set-font(normal, 20px);
+        margin: 12px 0 0 20px;
+    }
+    .short-info {
+        margin: 20px 12px 32px 20px;
+    }
+
+    .btn-container {
+        margin-left: 20px;
+    }
+}

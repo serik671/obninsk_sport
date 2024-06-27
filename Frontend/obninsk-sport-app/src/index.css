@@ -4,11 +4,22 @@
 }
 
 body {
+  overflow-y: auto;
+  overflow-x: hidden;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
   font-size: 24px;
   font-family: "Montserrat", sans-serif;
   color: #ffffff;
+  letter-spacing: 3px;
   background-color: #222222;
+}
+body .container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../public/img/FIBA-3-x-3-WT-Chengdu-2017-2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
 }/*# sourceMappingURL=index.css.map */

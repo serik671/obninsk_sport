@@ -1,0 +1,49 @@
+.mve-container {
+  width: 100vw;
+  height: 80vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
+  justify-content: flex-end;
+}
+.mve-container .main-part {
+  margin-left: 100px;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: normal;
+}
+.mve-container .main-part .mve-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: normal;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.mve-container .main-part .mve-heading .mve-sport-type-icon {
+  width: 48px;
+  margin-right: 20px;
+}
+.mve-container .main-part .mve-heading .mve-title {
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  font-size: 32px;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  letter-spacing: 3px;
+}
+.mve-container .main-part .mve-short-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
+  margin-left: 28px;
+  margin-bottom: 28px;
+}
+.mve-container .main-part .mve-short-info .stage {
+  margin-bottom: 12px;
+}/*# sourceMappingURL=MVE.css.map */

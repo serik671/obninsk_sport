@@ -1,0 +1,28 @@
+@import '../../tools';
+
+
+.news-and-events {
+    margin-top: 40px;
+    margin-left: 100px;
+    @include display-flex(column);
+    overflow-x: hidden;
+
+    .content {
+        padding: 40px 40px 52px 40px;       
+        max-height: 400px;
+        @include display-flex(row);
+        // flex-wrap: wrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        
+        &::-webkit-scrollbar {
+            background-color: $bg-color;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: $main-light-blue-color;
+            border-radius: 10px;
+        }
+    }
+}
+
+

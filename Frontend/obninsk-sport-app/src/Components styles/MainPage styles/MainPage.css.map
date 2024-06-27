@@ -1,0 +1,1 @@
+{"version":3,"sources":["MainPage.scss","../../tools.scss","MainPage.css"],"names":[],"mappings":"AAGA;EACI,gBAAA;EACA,kBAAA;ECiBA,aAAA;EACA,sBDjBsB;ECkBtB,uBAHsC;EAItC,mBAJsD;EDdtD,kBAAA;AECJ;AFCI;EACI,4BAAA;EACA,iBAAA;ECWJ,aAAA;EACA,mBDX0B;ECY1B,uBAHsC;EAItC,mBAJsD;EDPlD,gBAAA;EACA,kBAAA;AEGR;AFDQ;EACI,yBCdD;ACiBX;AFDQ;EACI,mBCfY;EDgBZ,mBAAA;AEGZ","file":"MainPage.css"}

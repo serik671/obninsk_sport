@@ -1,0 +1,47 @@
+.card-container {
+  min-width: 560px;
+  max-width: 570px;
+  height: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
+  background-image: url("../../../public/img/a36c8b08ba03f76e365eb34f09838fe0.jpg");
+  background-repeat: no-repeat;
+}
+.card-container .card-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: normal;
+  align-items: center;
+}
+.card-container .card-label .sport-icon {
+  width: 46px;
+}
+.card-container .card-label .title {
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  font-size: 32px;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  letter-spacing: 3px;
+  margin-left: 20px;
+}
+.card-container .date {
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  letter-spacing: 3px;
+  margin: 12px 0 0 20px;
+}
+.card-container .short-info {
+  margin: 20px 12px 32px 20px;
+}
+.card-container .btn-container {
+  margin-left: 20px;
+}/*# sourceMappingURL=ContentCard.css.map */

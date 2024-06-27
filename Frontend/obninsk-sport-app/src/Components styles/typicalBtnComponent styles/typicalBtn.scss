@@ -1,0 +1,17 @@
+@import '../../tools';
+
+.btn-container {
+    height: 72px;
+    width: 25em;
+    padding: 18px 25px;
+
+    background: $main-gradient-color-default;
+    border: none;
+    border-radius: 50px;
+
+
+    .btn-text {
+        @include set-font(bold, 24px);
+        text-decoration: none;
+    }
+}

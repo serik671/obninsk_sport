@@ -1,0 +1,18 @@
+.btn-container {
+  height: 72px;
+  width: 25em;
+  padding: 18px 25px;
+  background: linear-gradient(135deg, rgb(61, 44, 255) 0%, rgb(48, 243, 255) 100%);
+  border: none;
+  border-radius: 50px;
+}
+.btn-container .btn-text {
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  letter-spacing: 3px;
+  text-decoration: none;
+}/*# sourceMappingURL=typicalBtn.css.map */

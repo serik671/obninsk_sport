@@ -1,0 +1,45 @@
+@import '../../tools';
+
+.mve-container {
+    width: 100vw;
+    height: 80vh;
+
+    overflow-x: hidden;
+
+    
+    @include display-flex(column);
+    justify-content: flex-end;
+
+    .main-part {
+        margin-left: 100px;
+        margin-bottom: 80px;
+
+        @include display-flex(column, space-between);
+
+
+        .mve-heading {
+            @include display-flex(row, normal, center);
+
+            margin-bottom: 40px;
+            
+            .mve-sport-type-icon {
+                width: 48px;
+                margin-right: 20px;
+            }
+
+            .mve-title {
+                @include set-font(bold, 32px);
+            }
+        }
+
+        .mve-short-info {
+            @include display-flex(column);
+            margin-left: 28px;
+            margin-bottom: 28px;
+         
+            .stage {
+                margin-bottom: 12px;
+            }
+        }
+    }
+}

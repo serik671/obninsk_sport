@@ -11,6 +11,7 @@ class ObninskSport{
         let dbName: string = process.env.DB_NAME!;
         let dbUser: string = process.env.DB_USER!;
         let dbPassword: string = process.env.DB_PASSWORD!;
+        console.log(dbName, dbUser, dbPassword);
         Database.init(dbName, dbUser, dbPassword);
         Database.getConnection().sync().then(result=>{
             console.log("Database init!");
