@@ -1,0 +1,48 @@
+@import '../../tools';
+
+footer {
+    padding: 8px;
+    .footer-container {
+        padding: 26px 40px 26px 26px;
+        @include display-flex(row, space-between);
+    
+        .info {
+            @include display-flex(column);
+            
+            .footer-line {
+                @include set-font(normal, 12px);
+                color: $footer-text-color;
+                margin: 8px 0;
+                letter-spacing: 1px;
+
+                .contact-mail {
+                    text-decoration: none;
+                    color: $footer-text-color;
+
+                    transition: .2s;
+
+                    &:hover {
+                        color: #c6c5c5;
+                    }
+                }
+            }
+        }
+
+        .links {
+            @include display-flex(row);
+
+            .contact-link {
+                margin-left: 18px;
+
+                cursor: pointer;
+                
+                filter: invert(30%) sepia(0%) saturate(350%) hue-rotate(199deg) brightness(88%) contrast(82%);
+                
+                transition: .2s;
+                &:hover {
+                    filter: none;
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import Header from "../Components/HeaderComponent/Header";
 import MVE from "../Components/MVEComponent/MVE";
 import ContentCard from "../Components/ContentCardCopmonent/ContentCard";
+import Footer from "../Components/FooterComponent/Footer";
 
 import '../Components styles/MainPage styles/MainPage.css';
 
@@ -21,6 +22,7 @@ export default function MainPage() {
                     <ContentCard/>
                     <ContentCard/>
                 </div>
+                <Footer/>
             </div>  
         </body>
     )
