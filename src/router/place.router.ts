@@ -1,26 +1,26 @@
 import { Router } from "express";
-import { SportController } from "../controller/sport.controller";
+import { PlaceController } from "../controller/place.controller";
 import { ValidationError } from "sequelize";
 
-export class SportRoute{
+export class PlaceRouter{
     private router: Router = Router();
-    private sportController = new SportController();
+    private placeController = new PlaceController();
     constructor(){
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
                 if (limit < 0){
-                    this.sportController.readAll().then(result=>{
+                    this.placeController.readAll().then(result=>{
                         resp.send(result);
                     });
                 }else{
-                    this.sportController.readMany(limit).then(result=>{
+                    this.placeController.readMany(limit).then(result=>{
                         resp.send(result);
                     });
                 }
             })
             .post((req, resp) => {
-                this.sportController.create(req.body)
+                this.placeController.create(req.body)
                     .then(() => {
                         resp.send("Created!");
                     })
@@ -35,7 +35,7 @@ export class SportRoute{
         this.router.route("/:id")
             .get((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.sportController.read(id)
+                this.placeController.read(id)
                     .then(result=>{
                         if(result === undefined){
                             resp.status(404).send("Not found");
@@ -46,7 +46,7 @@ export class SportRoute{
             })
             .put((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.sportController.update(id, req.body)
+                this.placeController.update(id, req.body)
                     .then(()=>{
                         resp.send("OK");
                     })
@@ -59,7 +59,7 @@ export class SportRoute{
                     });
             })
             .delete((req, resp)=>{
-                this.sportController.delete(Number(req.params.id)||0).then(()=>{
+                this.placeController.delete(Number(req.params.id)||0).then(()=>{
                     resp.send("Deleted");
                 });
             });

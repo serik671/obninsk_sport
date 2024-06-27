@@ -1,21 +1,26 @@
 import { Router } from "express";
-import { ArticleController } from "../controller/article.controller";
+import { PlaceTypeController } from "../controller/placeType.controller";
 import { ValidationError } from "sequelize";
 
-export class ArticleRoute{
+export class PlaceTypeRouter{
     private router: Router = Router();
-    private articleController = new ArticleController();
+    private placeTypeController = new PlaceTypeController();
     constructor(){
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
-                limit = limit < 0 ? 10 : limit;
-                this.articleController.readMany(limit).then(result=>{
-                    resp.send(result);
-                });
+                if (limit < 0){
+                    this.placeTypeController.readAll().then(result=>{
+                        resp.send(result);
+                    });
+                }else{
+                    this.placeTypeController.readMany(limit).then(result=>{
+                        resp.send(result);
+                    });
+                }
             })
             .post((req, resp) => {
-                this.articleController.create(req.body)
+                this.placeTypeController.create(req.body)
                     .then(() => {
                         resp.send("Created!");
                     })
@@ -30,7 +35,7 @@ export class ArticleRoute{
         this.router.route("/:id")
             .get((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.articleController.read(id)
+                this.placeTypeController.read(id)
                     .then(result=>{
                         if(result === undefined){
                             resp.status(404).send("Not found");
@@ -41,7 +46,7 @@ export class ArticleRoute{
             })
             .put((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.articleController.update(id, req.body)
+                this.placeTypeController.update(id, req.body)
                     .then(()=>{
                         resp.send("OK");
                     })
@@ -54,7 +59,7 @@ export class ArticleRoute{
                     });
             })
             .delete((req, resp)=>{
-                this.articleController.delete(Number(req.params.id)||0).then(()=>{
+                this.placeTypeController.delete(Number(req.params.id)||0).then(()=>{
                     resp.send("Deleted");
                 });
             });

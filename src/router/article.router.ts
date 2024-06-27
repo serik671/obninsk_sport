@@ -1,26 +1,21 @@
 import { Router } from "express";
-import { AgeController } from "../controller/age.controller";
+import { ArticleController } from "../controller/article.controller";
 import { ValidationError } from "sequelize";
 
-export class AgeRoute{
+export class ArticleRouter{
     private router: Router = Router();
-    private ageController = new AgeController();
+    private articleController = new ArticleController();
     constructor(){
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
-                if (limit < 0){
-                    this.ageController.readAll().then(result=>{
-                        resp.send(result);
-                    });
-                }else{
-                    this.ageController.readMany(limit).then(result=>{
-                        resp.send(result);
-                    });
-                }
+                limit = limit < 0 ? 10 : limit;
+                this.articleController.readMany(limit).then(result=>{
+                    resp.send(result);
+                });
             })
             .post((req, resp) => {
-                this.ageController.create(req.body)
+                this.articleController.create(req.body)
                     .then(() => {
                         resp.send("Created!");
                     })
@@ -35,7 +30,7 @@ export class AgeRoute{
         this.router.route("/:id")
             .get((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.ageController.read(id)
+                this.articleController.read(id)
                     .then(result=>{
                         if(result === undefined){
                             resp.status(404).send("Not found");
@@ -46,7 +41,7 @@ export class AgeRoute{
             })
             .put((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.ageController.update(id, req.body)
+                this.articleController.update(id, req.body)
                     .then(()=>{
                         resp.send("OK");
                     })
@@ -59,7 +54,7 @@ export class AgeRoute{
                     });
             })
             .delete((req, resp)=>{
-                this.ageController.delete(Number(req.params.id)||0).then(()=>{
+                this.articleController.delete(Number(req.params.id)||0).then(()=>{
                     resp.send("Deleted");
                 });
             });

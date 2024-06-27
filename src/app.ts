@@ -1,12 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import { Database } from "./database/config.database"
-import { ArticleRoute } from "./route/article.router";
-import { EventRoute } from "./route/event.router";
-import { PlaceRoute } from "./route/place.router";
-import { SportRoute } from "./route/sport.router";
-import { PlaceTypeRoute } from "./route/placeType.router";
-import { AgeRoute } from "./route/age.router";
+import { ArticleRouter } from "./router/article.router";
+import { EventRouter } from "./router/event.router";
+import { PlaceRouter } from "./router/place.router";
+import { SportRouter } from "./router/sport.router";
+import { PlaceTypeRouter } from "./router/placeType.router";
+import { AgeRouter } from "./router/age.router";
 
 class ObninskSport{
     private app;
@@ -40,12 +40,12 @@ class ObninskSport{
         this.name = process.env.APP_NAME!;
 
         this.app.use(express.json());
-        this.app.use("/article", new ArticleRoute().getRouter());
-        this.app.use("/event", new EventRoute().getRouter());
-        this.app.use("/place", new PlaceRoute().getRouter());
-        this.app.use("/sport", new SportRoute().getRouter());
-        this.app.use("/place-type", new PlaceTypeRoute().getRouter());
-        this.app.use("/age", new AgeRoute().getRouter());
+        this.app.use("/article", new ArticleRouter().getRouter());
+        this.app.use("/event", new EventRouter().getRouter());
+        this.app.use("/place", new PlaceRouter().getRouter());
+        this.app.use("/sport", new SportRouter().getRouter());
+        this.app.use("/place-type", new PlaceTypeRouter().getRouter());
+        this.app.use("/age", new AgeRouter().getRouter());
     }
     public run(): void{
         this.app.listen(this.port, "localhost", ()=>{

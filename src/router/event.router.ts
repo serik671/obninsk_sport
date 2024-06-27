@@ -1,26 +1,21 @@
 import { Router } from "express";
-import { PlaceTypeController } from "../controller/placeType.controller";
+import { EventController } from "../controller/event.controller";
 import { ValidationError } from "sequelize";
 
-export class PlaceTypeRoute{
+export class EventRouter{
     private router: Router = Router();
-    private placeTypeController = new PlaceTypeController();
+    private EventController = new EventController();
     constructor(){
         this.router.route("/")
             .get((req, resp) => {
                 let limit: number = Number(req.query.limit) || 10;
-                if (limit < 0){
-                    this.placeTypeController.readAll().then(result=>{
-                        resp.send(result);
-                    });
-                }else{
-                    this.placeTypeController.readMany(limit).then(result=>{
-                        resp.send(result);
-                    });
-                }
+                limit = limit < 0 ? 10 : limit;
+                this.EventController.readMany(limit).then(result=>{
+                    resp.send(result);
+                });
             })
             .post((req, resp) => {
-                this.placeTypeController.create(req.body)
+                this.EventController.create(req.body)
                     .then(() => {
                         resp.send("Created!");
                     })
@@ -35,7 +30,7 @@ export class PlaceTypeRoute{
         this.router.route("/:id")
             .get((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.placeTypeController.read(id)
+                this.EventController.read(id)
                     .then(result=>{
                         if(result === undefined){
                             resp.status(404).send("Not found");
@@ -46,7 +41,7 @@ export class PlaceTypeRoute{
             })
             .put((req, resp)=>{
                 let id = Number(req.params.id) || 0;
-                this.placeTypeController.update(id, req.body)
+                this.EventController.update(id, req.body)
                     .then(()=>{
                         resp.send("OK");
                     })
@@ -59,7 +54,7 @@ export class PlaceTypeRoute{
                     });
             })
             .delete((req, resp)=>{
-                this.placeTypeController.delete(Number(req.params.id)||0).then(()=>{
+                this.EventController.delete(Number(req.params.id)||0).then(()=>{
                     resp.send("Deleted");
                 });
             });
