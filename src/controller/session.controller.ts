@@ -1,25 +1,27 @@
 import { User } from "../database/model/user.model";
-import uuid from 'uuid';
+import {v4} from 'uuid';
 import UserController from "./user.controller";
+import MailController from "./mail.controller";
 
 export class Session{
     private static users: Map<string, User> = new Map();
     private static sessions: Map<string, number> = new Map();
-    public static login(username: string, password: string): string|undefined{
+    public static async login(username: string, password: string){
         let userController = new UserController();
-        userController.getUserByLogin(username).then(result=>{
-            if (result && result.passwd === password){
-                let token: string = uuid.v4();
-                Session.users.set(token, result);
-                return token;
-            }
-        });
-        return undefined;
+        const result = await userController.getUserByLogin(username);
+        if (result && result.passwd === password) {
+            let token: string = v4();
+            Session.users.set(token, result);
+            return token;
+        } else {
+            return undefined;
+        }
     }
-    public static sendCodeOnEmail(): string{
+    public static sendCodeOnEmail(email: string): string{
         let code: number = Math.ceil(Math.random()*1_000_000);
-        //send email
-        let session_id = uuid.v4()
+        let mailController = new MailController();
+        mailController.sendMail(email, "Регистрация", `Код подтверждения: ${code}`);
+        let session_id: string = v4();
         this.sessions.set(session_id, code);
         return session_id;
     }

@@ -26,7 +26,7 @@ export default class MailController {
 
         this.transporter.sendMail(mailOptions, (error: any, info: any) => {
             if (error) {
-              return console.log('Ошибка отправки письма' + error);
+                console.log('Ошибка отправки письма' + error);
             } else {
                 console.log('Письмо отправлено: %s', info.messageId);
             }

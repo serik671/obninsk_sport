@@ -1,4 +1,5 @@
 import { default as express, Express } from "express";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import { Database } from "./database/config.database"
 import { ArticleRouter } from "./router/article.router";
@@ -11,6 +12,7 @@ import UserRouter from "./router/user.router";
 import PersonRouter from "./router/person.router";
 import UserTypeRouter from "./router/userType.router";
 import { PersonHasEventRouter } from "./router/personHasEvent.router";
+import { SessionRouter } from "./router/session.router";
 
 class ObninskSport{
     private app: Express;
@@ -60,6 +62,7 @@ class ObninskSport{
         this.name = process.env.APP_NAME!;
 
         this.app.use(express.json());
+        this.app.use(cookieParser());
         this.app.use("/article", new ArticleRouter().getRouter());
         this.app.use("/event", new EventRouter().getRouter());
         this.app.use("/place", new PlaceRouter().getRouter());
@@ -72,6 +75,7 @@ class ObninskSport{
         this.app.use('/user', new UserRouter().getRouter());
         this.app.use('/user-type', new UserTypeRouter().getRouter());
         this.app.use('/person', new PersonRouter().getRouter());
+        this.app.use("/session", new SessionRouter().getRouter());
     }
     
     public run(): void{
