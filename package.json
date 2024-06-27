@@ -1,0 +1,22 @@
+{
+  "name": "obninsksport",
+  "version": "1.0.0",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node .",
+    "build.start": "tsc && node ."
+  },
+  "author": "SBMPEI Team",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.9",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.1",
+    "sequelize": "^6.37.3",
+    "typescript": "^5.5.2"
+  }
+}
